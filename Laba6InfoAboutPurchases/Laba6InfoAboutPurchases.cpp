@@ -19,11 +19,11 @@ struct Order {
 
 
 double getTotalOrderCost(Order* orders, int amountOrders) {
-    double totalCost = 0.0;
+    double totalCost = 0;
 
     int day, month, year;
 
-    cout << "Type date to get total order cost. Day: ";
+    cout << "Type date to get total order cost. \nDay: ";
     cin >> day;
 
     cout << "Month: ";
@@ -54,20 +54,19 @@ double getTotalOrderCost(Order* orders, int amountOrders) {
     return totalCost;
 };
 
-
 bool wasBoughtAlone(Order* orders, int amountOrders) {
     string productName;
 
     int aloneCount = 0;
     int withOthersCount = 0;
 
-    cout << "Type product name to get info about purchases: ";
+    cout << endl << "Type product name to get info about purchases: ";
     cin >> productName;
 
     for (int i = 0; i < amountOrders; i++) {
         int amountProducts = sizeof(orders[i].products) / sizeof(orders[i].products[0]);
 
-        for (int j = 0; j < amountProducts; i++) {
+        for (int j = 0; j < amountProducts; j++) {
             if (orders[i].products[j].productName == productName) {
                 if (amountProducts == 1) {
                     aloneCount++;
@@ -75,6 +74,9 @@ bool wasBoughtAlone(Order* orders, int amountOrders) {
                 else {
                     withOthersCount++;
                 }
+            }
+            else {
+                continue;
             }
         }
     }
@@ -87,7 +89,7 @@ bool wasBoughtAlone(Order* orders, int amountOrders) {
 void calcTotalPurchasePerMonth(Order* orders, int amountOrders) {
     string customerName;
 
-    cout << "Type customer name to find all his purchase per month: ";
+    cout << endl << "Type customer name to find all his purchase per month: ";
     cin >> customerName;
 
     double totalPerMonth[12]{};
@@ -113,9 +115,6 @@ void calcTotalPurchasePerMonth(Order* orders, int amountOrders) {
 
 
 }
-
-
-
 
 int main() {
     int amountOrders;
@@ -147,7 +146,7 @@ int main() {
         cout << "Type year: ";
         cin >> yearMassive;
 
-        orders[i] = { orderNumberMassive, customerNameMassive, dayMassive, monthMassive, yearMassive };
+        orders[i] = { orderNumberMassive, customerNameMassive, yearMassive, monthMassive, dayMassive };
 
 
         cout << "Type how much product in orders(max 10): ";
@@ -189,7 +188,7 @@ int main() {
 
     bool wasBougthAloneOrWith = wasBoughtAlone(orders, amountOrders);
 
-    if (wasBoughtAlone) {
+    if (wasBougthAloneOrWith) {
         cout << endl << endl << "Product bougth alone more often";
     }
     else {
